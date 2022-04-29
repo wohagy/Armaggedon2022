@@ -14,6 +14,7 @@ protocol DestructionPresenterProtocol: AnyObject {
          router: RouterProtocol)
     
     func viewDidLoad()
+    func deleteAsteroidsFromDB()
 }
 
 final class DestructionPresenter: DestructionPresenterProtocol {
@@ -52,6 +53,15 @@ final class DestructionPresenter: DestructionPresenterProtocol {
     
     func viewDidLoad() {
         self.view?.fetchedResultsController = getFetchedResultsController()
+    }
+    
+    func deleteAsteroidsFromDB() {
+        guard let dbAsteroids = coreDataService?.fetchAsteroids() else { return }
+        coreDataService?.performSaveOnViewContext { context in
+            for dbAsteroid in dbAsteroids {
+                context.delete(dbAsteroid)
+            }
+        }
     }
 
 }

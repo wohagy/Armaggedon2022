@@ -59,6 +59,7 @@ final class AsteroidsTableViewCell: UITableViewCell {
         button.titleLabel?.font = .systemFont(ofSize: 18, weight: .medium)
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 14
+        button.startAnimatingPressActions()
         return button
     }()
     
@@ -110,7 +111,6 @@ final class AsteroidsTableViewCell: UITableViewCell {
     @objc private func destructButtonTaped() {
         guard let model = asteroidModel else { return }
         delegate?.destructButtonTaped(model: model)
-        destructButton.backgroundColor = .red
     }
     
 }

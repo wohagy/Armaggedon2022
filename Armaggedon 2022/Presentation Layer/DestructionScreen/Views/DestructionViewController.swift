@@ -14,6 +14,22 @@ protocol DestructionViewProtocol: AnyObject {
 
 class DestructionViewController: UIViewController, DestructionViewProtocol {
     
+    private let brussButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .red
+        button.setTitle("Уничтожить", for: .normal)
+        button.clipsToBounds = true
+        button.contentEdgeInsets = UIEdgeInsets(top: 5.0, left: 12.0, bottom: 5.0, right: 12.0)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .medium)
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = 14
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor.black.cgColor
+        return button
+    }()
+    
     let tableView = UITableView(frame: .zero)
     
     var presenter: DestructionPresenterProtocol?
@@ -29,6 +45,11 @@ class DestructionViewController: UIViewController, DestructionViewProtocol {
         view.backgroundColor = .white
         fetchedResultsControllerDelegate = BaseFetchedResultsControllerDelegate(tableView: tableView)
         fetchedResultsController?.delegate = fetchedResultsControllerDelegate
+        brussButton.addTarget(self, action: #selector(destructAsteroids), for: .touchUpInside)
+    }
+    
+    @objc private func destructAsteroids() {
+        presenter?.deleteAsteroidsFromDB()
     }
 }
 
@@ -76,12 +97,16 @@ extension DestructionViewController {
     
     private func setupConstraint() {
         view.addSubview(tableView)
+        view.addSubview(brussButton)
         
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            
+            brussButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            brussButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
 }

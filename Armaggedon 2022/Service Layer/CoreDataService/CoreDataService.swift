@@ -15,7 +15,8 @@ protocol CoreDataServiceProtocol: AnyObject {
     var viewContext: NSManagedObjectContext { get }
     
     func performSaveOnViewContext(_ block: @escaping (NSManagedObjectContext) -> Void)
-    func fetchAsteroid(asteroidName: String) -> DBAsteroid? 
+    func fetchAsteroid(asteroidName: String) -> DBAsteroid?
+    func fetchAsteroids() -> [DBAsteroid]?
 }
 
 final class CoreDataService: CoreDataServiceProtocol {
@@ -28,6 +29,11 @@ final class CoreDataService: CoreDataServiceProtocol {
     
     var viewContext: NSManagedObjectContext {
         return coreDataStack.container.viewContext
+    }
+    
+    func fetchAsteroids() -> [DBAsteroid]? {
+        let fetchRequest: NSFetchRequest<DBAsteroid> = DBAsteroid.fetchRequest()
+        return try? viewContext.fetch(fetchRequest)
     }
     
     func fetchAsteroid(asteroidName: String) -> DBAsteroid? {
