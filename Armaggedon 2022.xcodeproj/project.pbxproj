@@ -20,6 +20,12 @@
 		FA0D80FF281BF51C0008316B /* AsteroidsApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D80FE281BF51C0008316B /* AsteroidsApiModel.swift */; };
 		FA0D8105281C1CCE0008316B /* Date + DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D8104281C1CCE0008316B /* Date + DateFormatter.swift */; };
 		FA0D810B281C38590008316B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D810A281C38590008316B /* Logger.swift */; };
+		FA0D8115281C41980008316B /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA0D8113281C41980008316B /* CoreDataModel.xcdatamodeld */; };
+		FA0D8119281C42360008316B /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D8118281C42360008316B /* CoreDataStack.swift */; };
+		FA0D811E281C428E0008316B /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D811D281C428E0008316B /* CoreDataService.swift */; };
+		FA0D8121281C480F0008316B /* BaseFetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D8120281C480F0008316B /* BaseFetchedResultsControllerDelegate.swift */; };
+		FA0D8125281C495B0008316B /* DestructAsteroidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D8124281C495B0008316B /* DestructAsteroidCell.swift */; };
+		FA0D8128281C49D20008316B /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D8127281C49D20008316B /* Array.swift */; };
 		FA9A3CB12819C18D0038FC89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9A3CB02819C18D0038FC89 /* AppDelegate.swift */; };
 		FA9A3CBA2819C1990038FC89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA9A3CB92819C1990038FC89 /* Assets.xcassets */; };
 		FA9A3CBD2819C1990038FC89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA9A3CBB2819C1990038FC89 /* LaunchScreen.storyboard */; };
@@ -50,6 +56,12 @@
 		FA0D80FE281BF51C0008316B /* AsteroidsApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidsApiModel.swift; sourceTree = "<group>"; };
 		FA0D8104281C1CCE0008316B /* Date + DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + DateFormatter.swift"; sourceTree = "<group>"; };
 		FA0D810A281C38590008316B /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		FA0D8114281C41980008316B /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		FA0D8118281C42360008316B /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		FA0D811D281C428E0008316B /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		FA0D8120281C480F0008316B /* BaseFetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFetchedResultsControllerDelegate.swift; sourceTree = "<group>"; };
+		FA0D8124281C495B0008316B /* DestructAsteroidCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructAsteroidCell.swift; sourceTree = "<group>"; };
+		FA0D8127281C49D20008316B /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		FA9A3CAD2819C18D0038FC89 /* Armaggedon 2022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Armaggedon 2022.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA9A3CB02819C18D0038FC89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA9A3CB92819C1990038FC89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -132,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				FA0D8104281C1CCE0008316B /* Date + DateFormatter.swift */,
+				FA0D8127281C49D20008316B /* Array.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -142,6 +155,32 @@
 				FA0D810A281C38590008316B /* Logger.swift */,
 			);
 			path = Logger;
+			sourceTree = "<group>";
+		};
+		FA0D810D281C3A7C0008316B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				FA0D8113281C41980008316B /* CoreDataModel.xcdatamodeld */,
+				FA0D8118281C42360008316B /* CoreDataStack.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		FA0D811C281C42530008316B /* CoreDataService */ = {
+			isa = PBXGroup;
+			children = (
+				FA0D811D281C428E0008316B /* CoreDataService.swift */,
+			);
+			path = CoreDataService;
+			sourceTree = "<group>";
+		};
+		FA0D8123281C493A0008316B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA9A3CE92819CBE30038FC89 /* DestructionViewController.swift */,
+				FA0D8124281C495B0008316B /* DestructAsteroidCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		FA9A3CA42819C18C0038FC89 = {
@@ -179,6 +218,7 @@
 			children = (
 				FA9A3CDA2819CA750038FC89 /* Router.swift */,
 				FA9A3CD72819CA350038FC89 /* AssemblyBuilder.swift */,
+				FA0D8120281C480F0008316B /* BaseFetchedResultsControllerDelegate.swift */,
 				FA9A3CDE2819CAC50038FC89 /* AsteroidsScreen */,
 				FA9A3CDF2819CB020038FC89 /* DestructionScreen */,
 				FA9A3CCF2819C7E60038FC89 /* AppDelegate */,
@@ -191,6 +231,7 @@
 		FA9A3CCD2819C7C90038FC89 /* Service Layer */ = {
 			isa = PBXGroup;
 			children = (
+				FA0D811C281C42530008316B /* CoreDataService */,
 				FA0D80F0281BF43E0008316B /* NetworkService */,
 			);
 			path = "Service Layer";
@@ -199,6 +240,7 @@
 		FA9A3CCE2819C7D70038FC89 /* Core Layer */ = {
 			isa = PBXGroup;
 			children = (
+				FA0D810D281C3A7C0008316B /* CoreData */,
 				FA0D80E1281BF3E60008316B /* Network */,
 				FA0D8109281C38480008316B /* Logger */,
 			);
@@ -250,7 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				FA9A3CED2819CBF60038FC89 /* DestructionPresenter.swift */,
-				FA9A3CE92819CBE30038FC89 /* DestructionViewController.swift */,
+				FA0D8123281C493A0008316B /* Views */,
 			);
 			path = DestructionScreen;
 			sourceTree = "<group>";
@@ -384,18 +426,24 @@
 				FA9A3CF8281A02FD0038FC89 /* AsteroidsTableViewCell.swift in Sources */,
 				FA0D80F8281BF4D90008316B /* AsteroidsRequest.swift in Sources */,
 				FA9A3CEE2819CBF60038FC89 /* DestructionPresenter.swift in Sources */,
+				FA0D8125281C495B0008316B /* DestructAsteroidCell.swift in Sources */,
 				FA0D80FC281BF4F10008316B /* AsteroidsParser.swift in Sources */,
 				FA0D8105281C1CCE0008316B /* Date + DateFormatter.swift in Sources */,
 				FA0D80F3281BF4900008316B /* RequestsFactory.swift in Sources */,
+				FA0D8128281C49D20008316B /* Array.swift in Sources */,
 				FA9A3CDB2819CA750038FC89 /* Router.swift in Sources */,
 				FA9A3CE12819CB540038FC89 /* AsteroidsViewController.swift in Sources */,
+				FA0D8121281C480F0008316B /* BaseFetchedResultsControllerDelegate.swift in Sources */,
 				FA9A3CFE281A15800038FC89 /* ShadowView.swift in Sources */,
 				FA0D80E8281BF3E60008316B /* RequestConfig.swift in Sources */,
 				FA9A3CFB281A092C0038FC89 /* Asteroid.swift in Sources */,
 				FA9A3CE52819CB780038FC89 /* AsteroidsPresenter.swift in Sources */,
 				FA0D80EB281BF3E60008316B /* NetworkError.swift in Sources */,
+				FA0D8119281C42360008316B /* CoreDataStack.swift in Sources */,
 				FA0D80EE281BF42D0008316B /* NetworkService.swift in Sources */,
+				FA0D811E281C428E0008316B /* CoreDataService.swift in Sources */,
 				FA9A3CD82819CA350038FC89 /* AssemblyBuilder.swift in Sources */,
+				FA0D8115281C41980008316B /* CoreDataModel.xcdatamodeld in Sources */,
 				FA0D80FF281BF51C0008316B /* AsteroidsApiModel.swift in Sources */,
 				FA9A3CEA2819CBE30038FC89 /* DestructionViewController.swift in Sources */,
 				FA9A3CB12819C18D0038FC89 /* AppDelegate.swift in Sources */,
@@ -596,6 +644,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FA0D8113281C41980008316B /* CoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FA0D8114281C41980008316B /* CoreDataModel.xcdatamodel */,
+			);
+			currentVersion = FA0D8114281C41980008316B /* CoreDataModel.xcdatamodel */;
+			path = CoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FA9A3CA52819C18C0038FC89 /* Project object */;
 }

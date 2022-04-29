@@ -70,7 +70,7 @@ final class AsteroidsTableViewCell: UITableViewCell {
         nameLabel.text = model.name
         diameterLabel.text = "Диаметр: \(model.diameter) км"
         arrivesLabel.text = "Подлетает \(model.approachDate)"
-        distanceLabel.text = "на расстояние \(model.kmDistance)"
+        distanceLabel.text = "на расстояние \(model.kmDistance) км"
         gradeLabel.text = "Оценка: \(model.isDanger ? "опасен" : "не опасен")"
         gradientView.backgroundColor = .green
     }

@@ -22,9 +22,9 @@ final class AsteroidsParser: ParserProtocol {
                     
                     var name: String
                     var approachDate: String
-                    var diametr: Double
-                    var kmDistance: String
-                    var lunarDistance: String
+                    var diameter: Double
+                    var kmDistance: Double
+                    var lunarDistance: Double
                     var isDanger: Bool
                     
                     name = asteroid.name
@@ -33,15 +33,16 @@ final class AsteroidsParser: ParserProtocol {
                     
                     let diameterMax = asteroid.estimatedDiameter.kilometers.estimatedDiameterMax
                     let diameterMin = asteroid.estimatedDiameter.kilometers.estimatedDiameterMin
-                    diametr = (diameterMax + diameterMin) / 2
+                    let unroundedDiameter = (diameterMax + diameterMin) / 2
+                    diameter = round(unroundedDiameter * 100) / 100
                     
                     approachDate = asteroid.closeApproachData.first?.closeApproachDate ?? "Неизвестно"
-                    kmDistance = asteroid.closeApproachData.first?.missDistance.kilometers ?? "Неизвестно"
-                    lunarDistance = asteroid.closeApproachData.first?.missDistance.lunar ?? "Неизвестно"
+                    kmDistance = stringToRoundDouble(asteroid.closeApproachData.first?.missDistance.kilometers)
+                    lunarDistance = stringToRoundDouble(asteroid.closeApproachData.first?.missDistance.lunar)
                     
                     let asteroidModel = Asteroid(name: name,
                                                  approachDate: approachDate,
-                                                 diameter: diametr,
+                                                 diameter: diameter,
                                                  kmDistance: kmDistance,
                                                  lunarDistance: lunarDistance,
                                                  isDanger: isDanger)
@@ -53,5 +54,12 @@ final class AsteroidsParser: ParserProtocol {
         } catch {
             return nil
         }
+    }
+    
+    private func stringToRoundDouble(_ optionalString: String?) -> Double {
+        guard let string = optionalString,
+              let unroundDouble = Double(string) else { return 0 }
+        let double = round(unroundDouble * 100) / 100
+        return double
     }
 }

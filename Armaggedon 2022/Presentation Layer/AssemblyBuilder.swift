@@ -14,6 +14,8 @@ protocol AssemblyBuilderProtocol {
 
 final class AssemblyBuilder: AssemblyBuilderProtocol {
     
+    private var coreDataService: CoreDataServiceProtocol = CoreDataService(coreDataStack: CoreDataStack())
+    
     func createAsteroidsModule(router: RouterProtocol) -> UIViewController {
         let view = AsteroidsViewController()
         let networkService = NetworkService()
@@ -25,7 +27,7 @@ final class AssemblyBuilder: AssemblyBuilderProtocol {
     
     func createDestructionModule(router: RouterProtocol) -> UIViewController {
         let view = DestructionViewController()
-        let presenter = DestructionPresenter(view: view, router: router)
+        let presenter = DestructionPresenter(view: view, coreDataService: coreDataService, router: router)
         view.presenter = presenter
         
         return view

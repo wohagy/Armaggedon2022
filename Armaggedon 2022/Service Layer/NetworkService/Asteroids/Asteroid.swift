@@ -11,7 +11,7 @@ struct Asteroid {
     let name: String
     let approachDate: String
     let diameter: Double
-    let kmDistance: String
-    let lunarDistance: String
+    let kmDistance: Double
+    let lunarDistance: Double
     let isDanger: Bool
 }

@@ -29,7 +29,7 @@ struct AsteroidsRequest: RequestProtocol {
         components.queryItems = [queryItemStartDay, queryItemEndDay, queryItemApiKey]
         
         guard let url = components.url else { return nil }
-        
+        print(url)
         return URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60)
     }
 }
