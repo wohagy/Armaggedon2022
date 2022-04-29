@@ -8,16 +8,21 @@
 import UIKit
 
 protocol AsteroidsViewProtocol: AnyObject {
+    var tableView: UITableView { get }
+    var asteroids: [Asteroid] { get set }
 }
 
 final class AsteroidsViewController: UIViewController, AsteroidsViewProtocol {
     
-    private let tableView = UITableView(frame: .zero)
+    let tableView = UITableView(frame: .zero)
+    
+    var asteroids = [Asteroid]()
     
     var presenter: AsteroidsPresenterProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad()
         setupTableView()
         setupConstraint()
         title = "Asteroids"
@@ -37,7 +42,7 @@ extension AsteroidsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return asteroids.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -45,7 +50,7 @@ extension AsteroidsViewController: UITableViewDelegate, UITableViewDataSource {
                                                  for: indexPath)
         guard let asteroidCell = cell as? AsteroidsTableViewCell else { return cell }
         
-        asteroidCell.configure()
+        asteroidCell.configure(model: asteroids[indexPath.row])
         
         return asteroidCell
     }

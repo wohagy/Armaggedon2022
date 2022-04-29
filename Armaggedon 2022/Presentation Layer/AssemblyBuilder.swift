@@ -16,7 +16,8 @@ final class AssemblyBuilder: AssemblyBuilderProtocol {
     
     func createAsteroidsModule(router: RouterProtocol) -> UIViewController {
         let view = AsteroidsViewController()
-        let presenter = AsteroidsPresenter(view: view, router: router)
+        let networkService = NetworkService()
+        let presenter = AsteroidsPresenter(view: view, networkService: networkService, router: router)
         view.presenter = presenter
         
         return view

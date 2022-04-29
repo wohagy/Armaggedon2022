@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		4FA9A4F18F10B2B6B0EA0A4B /* Pods_Armaggedon_2022.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2A57124BF03A5EBDEC0FEFA /* Pods_Armaggedon_2022.framework */; };
+		FA0D80E7281BF3E60008316B /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D80E2281BF3E60008316B /* ParserProtocol.swift */; };
+		FA0D80E8281BF3E60008316B /* RequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D80E3281BF3E60008316B /* RequestConfig.swift */; };
+		FA0D80E9281BF3E60008316B /* RequestSenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D80E4281BF3E60008316B /* RequestSenderProtocol.swift */; };
+		FA0D80EA281BF3E60008316B /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D80E5281BF3E60008316B /* RequestProtocol.swift */; };
+		FA0D80EB281BF3E60008316B /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D80E6281BF3E60008316B /* NetworkError.swift */; };
+		FA0D80EE281BF42D0008316B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D80ED281BF42D0008316B /* NetworkService.swift */; };
+		FA0D80F3281BF4900008316B /* RequestsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D80F2281BF4900008316B /* RequestsFactory.swift */; };
+		FA0D80F8281BF4D90008316B /* AsteroidsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D80F7281BF4D90008316B /* AsteroidsRequest.swift */; };
+		FA0D80FC281BF4F10008316B /* AsteroidsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D80FB281BF4F10008316B /* AsteroidsParser.swift */; };
+		FA0D80FF281BF51C0008316B /* AsteroidsApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D80FE281BF51C0008316B /* AsteroidsApiModel.swift */; };
 		FA9A3CB12819C18D0038FC89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9A3CB02819C18D0038FC89 /* AppDelegate.swift */; };
 		FA9A3CBA2819C1990038FC89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA9A3CB92819C1990038FC89 /* Assets.xcassets */; };
 		FA9A3CBD2819C1990038FC89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA9A3CBB2819C1990038FC89 /* LaunchScreen.storyboard */; };
@@ -26,6 +36,16 @@
 		15E2ECAABD1781DE9EC68662 /* Pods-Armaggedon 2022.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armaggedon 2022.release.xcconfig"; path = "Target Support Files/Pods-Armaggedon 2022/Pods-Armaggedon 2022.release.xcconfig"; sourceTree = "<group>"; };
 		7331ED2436AE54DA35FEB17A /* Pods-Armaggedon 2022.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armaggedon 2022.debug.xcconfig"; path = "Target Support Files/Pods-Armaggedon 2022/Pods-Armaggedon 2022.debug.xcconfig"; sourceTree = "<group>"; };
 		F2A57124BF03A5EBDEC0FEFA /* Pods_Armaggedon_2022.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Armaggedon_2022.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA0D80E2281BF3E60008316B /* ParserProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
+		FA0D80E3281BF3E60008316B /* RequestConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestConfig.swift; sourceTree = "<group>"; };
+		FA0D80E4281BF3E60008316B /* RequestSenderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestSenderProtocol.swift; sourceTree = "<group>"; };
+		FA0D80E5281BF3E60008316B /* RequestProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
+		FA0D80E6281BF3E60008316B /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		FA0D80ED281BF42D0008316B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		FA0D80F2281BF4900008316B /* RequestsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsFactory.swift; sourceTree = "<group>"; };
+		FA0D80F7281BF4D90008316B /* AsteroidsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidsRequest.swift; sourceTree = "<group>"; };
+		FA0D80FB281BF4F10008316B /* AsteroidsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidsParser.swift; sourceTree = "<group>"; };
+		FA0D80FE281BF51C0008316B /* AsteroidsApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidsApiModel.swift; sourceTree = "<group>"; };
 		FA9A3CAD2819C18D0038FC89 /* Armaggedon 2022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Armaggedon 2022.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA9A3CB02819C18D0038FC89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA9A3CB92819C1990038FC89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -69,6 +89,39 @@
 				15E2ECAABD1781DE9EC68662 /* Pods-Armaggedon 2022.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		FA0D80E1281BF3E60008316B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FA0D80E2281BF3E60008316B /* ParserProtocol.swift */,
+				FA0D80E3281BF3E60008316B /* RequestConfig.swift */,
+				FA0D80E4281BF3E60008316B /* RequestSenderProtocol.swift */,
+				FA0D80E5281BF3E60008316B /* RequestProtocol.swift */,
+				FA0D80E6281BF3E60008316B /* NetworkError.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		FA0D80F0281BF43E0008316B /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				FA0D80ED281BF42D0008316B /* NetworkService.swift */,
+				FA0D80F2281BF4900008316B /* RequestsFactory.swift */,
+				FA0D80F1281BF4720008316B /* Asteroids */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		FA0D80F1281BF4720008316B /* Asteroids */ = {
+			isa = PBXGroup;
+			children = (
+				FA0D80FE281BF51C0008316B /* AsteroidsApiModel.swift */,
+				FA9A3CFA281A092C0038FC89 /* Asteroid.swift */,
+				FA0D80F7281BF4D90008316B /* AsteroidsRequest.swift */,
+				FA0D80FB281BF4F10008316B /* AsteroidsParser.swift */,
+			);
+			path = Asteroids;
 			sourceTree = "<group>";
 		};
 		FA9A3CA42819C18C0038FC89 = {
@@ -117,6 +170,7 @@
 		FA9A3CCD2819C7C90038FC89 /* Service Layer */ = {
 			isa = PBXGroup;
 			children = (
+				FA0D80F0281BF43E0008316B /* NetworkService */,
 			);
 			path = "Service Layer";
 			sourceTree = "<group>";
@@ -124,6 +178,7 @@
 		FA9A3CCE2819C7D70038FC89 /* Core Layer */ = {
 			isa = PBXGroup;
 			children = (
+				FA0D80E1281BF3E60008316B /* Network */,
 			);
 			path = "Core Layer";
 			sourceTree = "<group>";
@@ -165,7 +220,6 @@
 			children = (
 				FA9A3CE42819CB780038FC89 /* AsteroidsPresenter.swift */,
 				FA9A3CF5281A02150038FC89 /* Views */,
-				FA9A3CFA281A092C0038FC89 /* Asteroid.swift */,
 			);
 			path = AsteroidsScreen;
 			sourceTree = "<group>";
@@ -303,16 +357,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA0D80E9281BF3E60008316B /* RequestSenderProtocol.swift in Sources */,
 				FA9A3CF8281A02FD0038FC89 /* AsteroidsTableViewCell.swift in Sources */,
+				FA0D80F8281BF4D90008316B /* AsteroidsRequest.swift in Sources */,
 				FA9A3CEE2819CBF60038FC89 /* DestructionPresenter.swift in Sources */,
+				FA0D80FC281BF4F10008316B /* AsteroidsParser.swift in Sources */,
+				FA0D80F3281BF4900008316B /* RequestsFactory.swift in Sources */,
 				FA9A3CDB2819CA750038FC89 /* Router.swift in Sources */,
 				FA9A3CE12819CB540038FC89 /* AsteroidsViewController.swift in Sources */,
 				FA9A3CFE281A15800038FC89 /* ShadowView.swift in Sources */,
+				FA0D80E8281BF3E60008316B /* RequestConfig.swift in Sources */,
 				FA9A3CFB281A092C0038FC89 /* Asteroid.swift in Sources */,
 				FA9A3CE52819CB780038FC89 /* AsteroidsPresenter.swift in Sources */,
+				FA0D80EB281BF3E60008316B /* NetworkError.swift in Sources */,
+				FA0D80EE281BF42D0008316B /* NetworkService.swift in Sources */,
 				FA9A3CD82819CA350038FC89 /* AssemblyBuilder.swift in Sources */,
+				FA0D80FF281BF51C0008316B /* AsteroidsApiModel.swift in Sources */,
 				FA9A3CEA2819CBE30038FC89 /* DestructionViewController.swift in Sources */,
 				FA9A3CB12819C18D0038FC89 /* AppDelegate.swift in Sources */,
+				FA0D80E7281BF3E60008316B /* ParserProtocol.swift in Sources */,
+				FA0D80EA281BF3E60008316B /* RequestProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

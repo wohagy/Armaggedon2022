@@ -66,12 +66,12 @@ final class AsteroidsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
-        nameLabel.text = "2021 ER"
-        diameterLabel.text = "Диаметр: 300 м"
-        arrivesLabel.text = "Подлетает 2 ноября 2022"
-        distanceLabel.text = "на расстояние 9 331 775 км"
-        gradeLabel.text = "Оценка: не опасен"
+    func configure(model: Asteroid) {
+        nameLabel.text = model.name
+        diameterLabel.text = "Диаметр: \(model.diameter) км"
+        arrivesLabel.text = "Подлетает \(model.approachDate)"
+        distanceLabel.text = "на расстояние \(model.kmDistance)"
+        gradeLabel.text = "Оценка: \(model.isDanger ? "опасен" : "не опасен")"
         gradientView.backgroundColor = .green
     }
     
