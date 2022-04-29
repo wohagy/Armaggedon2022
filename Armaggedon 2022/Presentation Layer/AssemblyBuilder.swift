@@ -10,7 +10,7 @@ import UIKit
 protocol AssemblyBuilderProtocol {
     func createAsteroidsModule(router: RouterProtocol) -> UIViewController
     func createDestructionModule(router: RouterProtocol) -> UIViewController
-    func createFilterModule(router: RouterProtocol) -> UIViewController
+    func createFilterModule(filterSettings: FilterSettings, filterSettingsDelegate: FilterDelegate, router: RouterProtocol) -> UIViewController
 }
 
 final class AssemblyBuilder: AssemblyBuilderProtocol {
@@ -34,9 +34,9 @@ final class AssemblyBuilder: AssemblyBuilderProtocol {
         return view
     }
     
-    func createFilterModule(router: RouterProtocol) -> UIViewController {
+    func createFilterModule(filterSettings: FilterSettings, filterSettingsDelegate: FilterDelegate, router: RouterProtocol) -> UIViewController {
         let view = FilterViewController()
-        let presenter = FilterPresenter(view: view, router: router)
+        let presenter = FilterPresenter(view: view, filterSettings: filterSettings, filterSettingsDelegate: filterSettingsDelegate, router: router)
         view.presenter = presenter
         
         return view

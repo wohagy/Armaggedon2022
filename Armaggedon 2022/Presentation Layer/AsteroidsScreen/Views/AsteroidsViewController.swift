@@ -10,6 +10,7 @@ import UIKit
 protocol AsteroidsViewProtocol: AnyObject {
     var tableView: UITableView { get }
     var asteroids: [Asteroid] { get set }
+    var filterSettings: FilterSettings? { get set }
     
     func showTableView()
     func tableViewAddIndicator(for isNeedIndicator: Bool)
@@ -24,6 +25,8 @@ final class AsteroidsViewController: UIViewController, AsteroidsViewProtocol {
     var asteroids = [Asteroid]()
     
     var presenter: AsteroidsPresenterProtocol?
+    
+    var filterSettings: FilterSettings?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,9 +75,10 @@ extension AsteroidsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AsteroidsTableViewCell.identifier,
                                                  for: indexPath)
-        guard let asteroidCell = cell as? AsteroidsTableViewCell else { return cell }
+        guard let asteroidCell = cell as? AsteroidsTableViewCell,
+              let filterSettings = filterSettings else { return cell }
         
-        asteroidCell.configure(model: asteroids[indexPath.row], cellDelegate: self)
+        asteroidCell.configure(model: asteroids[indexPath.row], settings: filterSettings, cellDelegate: self)
         
         return asteroidCell
     }

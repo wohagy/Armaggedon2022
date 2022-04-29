@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FilterViewProtocol: AnyObject {
-    
+    var filterSettings: FilterSettings? { get set }
 }
 
 final class FilterViewController: UIViewController, FilterViewProtocol {
@@ -21,6 +21,8 @@ final class FilterViewController: UIViewController, FilterViewProtocol {
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
     var presenter: FilterPresenterProtocol?
+    
+    var filterSettings: FilterSettings?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,20 +53,21 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let defaultCell = tableView.dequeueReusableCell(withIdentifier: UnitFilterTableViewCell.identifier, for: indexPath)
-        guard let cellType = CellType(rawValue: indexPath.row) else { return defaultCell }
+        guard let cellType = CellType(rawValue: indexPath.row),
+              let settings = filterSettings else { return defaultCell }
         
         switch cellType {
         
         case .unitFilterCell:
             let cell = tableView.dequeueReusableCell(withIdentifier: UnitFilterTableViewCell.identifier, for: indexPath)
             guard let unitFilterCell = cell as? UnitFilterTableViewCell else { return cell }
-            unitFilterCell.configure()
+            unitFilterCell.configure(filterSettings: settings, delegate: self)
             return unitFilterCell
             
         case .dangerFilterCell:
             let cell = tableView.dequeueReusableCell(withIdentifier: DangerFilterTableViewCell.identifier, for: indexPath)
             guard let dangerFilterCell = cell as? DangerFilterTableViewCell else { return cell }
-            dangerFilterCell.configure()
+            dangerFilterCell.configure(filterSettings: settings, delegate: self)
             return dangerFilterCell
         }
     }
@@ -85,7 +88,18 @@ extension FilterViewController {
     }
     
     @objc private func applyFilter() {
-        
+        guard let settings = filterSettings else { return }
+        presenter?.changeSettings(settings: settings)
+    }
+}
+
+// MARK: - FilterDelegate
+
+extension FilterViewController: FilterDelegate {
+    
+    func changeFilterSettings(with settings: FilterSettings) {
+        filterSettings = settings
+        tableView.reloadData()
     }
 }
 

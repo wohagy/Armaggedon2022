@@ -7,9 +7,17 @@
 
 import UIKit
 
+protocol UnitFilterCellDelegate: AnyObject {
+    func changeUnitMetrics(units: UnitMetrics)
+}
+
 final class UnitFilterTableViewCell: UITableViewCell {
 
     static let identifier = "UnitFilterTableViewCell"
+    
+    private weak var delegate: FilterDelegate?
+    
+    private var filterSettings: FilterSettings?
 
     private let label: UILabel = {
         let label = UILabel()
@@ -18,11 +26,12 @@ final class UnitFilterTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let segmentedControl: UISegmentedControl = {
+    private lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.insertSegment(withTitle: "км", at: 0, animated: false)
-        segmentedControl.insertSegment(withTitle: "л.орб", at: 1, animated: false)
+        segmentedControl.insertSegment(withTitle: UnitMetrics.kilometers.rawValue, at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: UnitMetrics.lunar.rawValue, at: 1, animated: false)
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
         return segmentedControl
     }()
     
@@ -36,7 +45,16 @@ final class UnitFilterTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    func configure(filterSettings: FilterSettings, delegate: FilterDelegate) {
+        self.delegate = delegate
+        self.filterSettings = filterSettings
+        
+        switch filterSettings.unitMetrics {
+        case .kilometers:
+            self.segmentedControl.selectedSegmentIndex = 0
+        case .lunar:
+            self.segmentedControl.selectedSegmentIndex = 1
+        }
         
     }
     
@@ -47,6 +65,18 @@ final class UnitFilterTableViewCell: UITableViewCell {
     private func addSubviews() {
         contentView.addSubview(label)
         contentView.addSubview(segmentedControl)
+    }
+    
+    @objc private func segmentedControlValueChanged(sender: UISegmentedControl) {
+        guard var settings = filterSettings else { return }
+        
+        if sender.selectedSegmentIndex == 0 {
+            settings.unitMetrics = .kilometers
+        } else if sender.selectedSegmentIndex == 1 {
+            settings.unitMetrics  = .lunar
+        }
+
+        delegate?.changeFilterSettings(with: settings)
     }
 }
 

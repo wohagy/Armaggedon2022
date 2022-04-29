@@ -39,10 +39,13 @@ final class AsteroidsPresenter: AsteroidsPresenterProtocol {
     private var isLoadInProgress = false
     private var requestStartDay = Date()
     
+    private var filterSettings = FilterSettings(unitMetrics: .kilometers, showOnlyDangerous: false)
+    
     func viewDidLoad() {
         loadAsteroids { [weak self] in
             self?.view?.showTableView()
         }
+        view?.filterSettings = filterSettings
     }
     
     func loadMoreAsteroids() {
@@ -64,16 +67,27 @@ final class AsteroidsPresenter: AsteroidsPresenterProtocol {
         
         requestStartDay = endDay
         
-        networkService?.send(requestConfig: requestConfig) { result in
+        networkService?.send(requestConfig: requestConfig) { [weak self] result in
             switch result {
             case .success(let asteroids):
                 DispatchQueue.main.async {
-                    self.view?.asteroids.append(contentsOf: asteroids)
-                    self.view?.tableView.reloadData()
+                    
+                    guard let isNeedOnlyDangerous = self?.filterSettings.showOnlyDangerous else { return }
+            
+                    let preparedAsteroids: [Asteroid]
+                    
+                    if isNeedOnlyDangerous {
+                        preparedAsteroids = asteroids.filter { $0.isDanger == true }
+                    } else {
+                        preparedAsteroids = asteroids
+                    }
+                    
+                    self?.view?.asteroids.append(contentsOf: preparedAsteroids)
+                    self?.view?.tableView.reloadData()
                     if let completion = completionHandler {
                         completion()
                     }
-                    self.isLoadInProgress = false
+                    self?.isLoadInProgress = false
                 }
             case .failure(let error):
                 Logger.shared.message(error.localizedDescription)
@@ -98,7 +112,20 @@ final class AsteroidsPresenter: AsteroidsPresenterProtocol {
     }
     
     func presentFilterScreen() {
-        router.presentFilterViewController()
+        router.presentFilterViewController(filterSettings: filterSettings, filterSettingsDelegate: self)
     }
 
+}
+
+// MARK: - FilterDelegate
+
+extension AsteroidsPresenter: FilterDelegate {
+    
+    func changeFilterSettings(with settings: FilterSettings) {
+        filterSettings = settings
+        view?.filterSettings = settings
+        view?.asteroids = []
+        requestStartDay = Date()
+        loadMoreAsteroids()
+    }
 }

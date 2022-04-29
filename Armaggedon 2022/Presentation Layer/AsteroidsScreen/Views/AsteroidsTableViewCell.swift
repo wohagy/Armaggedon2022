@@ -75,11 +75,20 @@ final class AsteroidsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(model: Asteroid, cellDelegate: AsteroidsTableViewCellDelegate) {
+    func configure(model: Asteroid, settings: FilterSettings, cellDelegate: AsteroidsTableViewCellDelegate) {
         nameLabel.text = model.name
+        
         diameterLabel.text = "Диаметр: \(model.diameter) км"
+        
+        switch settings.unitMetrics {
+        case .kilometers:
+            distanceLabel.text = "на расстояние \(model.kmDistance) \(settings.unitMetrics.rawValue)"
+        case .lunar:
+            distanceLabel.text = "на расстояние \(model.lunarDistance) \(settings.unitMetrics.rawValue)"
+        }
+        
         arrivesLabel.text = "Подлетает \(model.approachDate)"
-        distanceLabel.text = "на расстояние \(model.kmDistance) км"
+        
         gradeLabel.text = "Оценка: \(model.isDanger ? "опасен" : "не опасен")"
         gradeLabel.textColor = model.isDanger ? .red : .label
         gradientView.backgroundColor = model.isDanger ? .red : .green

@@ -10,6 +10,10 @@ import UIKit
 final class DangerFilterTableViewCell: UITableViewCell {
 
     static let identifier = "DangerFilterTableViewCell"
+    
+    private weak var delegate: FilterDelegate?
+    
+    private var filterSettings: FilterSettings?
 
     private let label: UILabel = {
         let label = UILabel()
@@ -18,9 +22,10 @@ final class DangerFilterTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let filterSwitch: UISwitch = {
+    private lazy var filterSwitch: UISwitch = {
         let filterSwitch = UISwitch()
         filterSwitch.translatesAutoresizingMaskIntoConstraints = false
+        filterSwitch.addTarget(self, action: #selector(switchChanged), for: .valueChanged)
         return filterSwitch
     }()
     
@@ -34,8 +39,11 @@ final class DangerFilterTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
-        label.textColor = .red
+    func configure(filterSettings: FilterSettings, delegate: FilterDelegate) {
+        self.delegate = delegate
+        self.filterSettings = filterSettings
+        
+        filterSwitch.isOn = filterSettings.showOnlyDangerous
     }
     
     override func prepareForReuse() {
@@ -45,6 +53,12 @@ final class DangerFilterTableViewCell: UITableViewCell {
     private func addSubviews() {
         contentView.addSubview(label)
         contentView.addSubview(filterSwitch)
+    }
+    
+    @objc private func switchChanged(sender: UISwitch) {
+        guard var settings = filterSettings else { return }
+        settings.showOnlyDangerous = sender.isOn
+        delegate?.changeFilterSettings(with: settings)
     }
 }
 
