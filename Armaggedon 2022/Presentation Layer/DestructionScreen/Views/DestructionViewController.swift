@@ -28,6 +28,7 @@ class DestructionViewController: UIViewController, DestructionViewProtocol {
         title = "Destruction"
         view.backgroundColor = .white
         fetchedResultsControllerDelegate = BaseFetchedResultsControllerDelegate(tableView: tableView)
+        fetchedResultsController?.delegate = fetchedResultsControllerDelegate
     }
 }
 
@@ -40,7 +41,7 @@ extension DestructionViewController: UITableViewDelegate, UITableViewDataSource 
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
-        
+        tableView.separatorStyle = .none
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -55,9 +56,11 @@ extension DestructionViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DestructAsteroidCell.identifier,
                                                  for: indexPath)
-        guard let asteroidCell = cell as? DestructAsteroidCell else { return cell }
+        guard let asteroidCell = cell as? DestructAsteroidCell,
+              let dbAsteroid = fetchedResultsController?.object(at: indexPath),
+              let asteroid = Asteroid(dbAsteroid: dbAsteroid)else { return cell }
         
-        let dbAsteroid = fetchedResultsController?.object(at: indexPath)
+        asteroidCell.configure(model: asteroid)
         
         return asteroidCell
     }

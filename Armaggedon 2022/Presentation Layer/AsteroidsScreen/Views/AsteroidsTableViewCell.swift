@@ -80,7 +80,8 @@ final class AsteroidsTableViewCell: UITableViewCell {
         arrivesLabel.text = "Подлетает \(model.approachDate)"
         distanceLabel.text = "на расстояние \(model.kmDistance) км"
         gradeLabel.text = "Оценка: \(model.isDanger ? "опасен" : "не опасен")"
-        gradientView.backgroundColor = .green
+        gradeLabel.textColor = model.isDanger ? .red : .label
+        gradientView.backgroundColor = model.isDanger ? .red : .green
         
         asteroidModel = model
         delegate = cellDelegate
@@ -90,6 +91,7 @@ final class AsteroidsTableViewCell: UITableViewCell {
         super.prepareForReuse()
         asteroidModel = nil
         delegate = nil
+        destructButton.backgroundColor = .blue
     }
     
     private func addSubviews() {
@@ -108,6 +110,7 @@ final class AsteroidsTableViewCell: UITableViewCell {
     @objc private func destructButtonTaped() {
         guard let model = asteroidModel else { return }
         delegate?.destructButtonTaped(model: model)
+        destructButton.backgroundColor = .red
     }
     
 }
