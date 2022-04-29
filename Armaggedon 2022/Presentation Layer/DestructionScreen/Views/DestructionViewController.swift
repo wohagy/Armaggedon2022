@@ -48,6 +48,7 @@ extension DestructionViewController: UITableViewDelegate, UITableViewDataSource 
               let number = sections[safeIndex: section]?.numberOfObjects else {
             return 0
         }
+        
         return number
     }
     
@@ -57,8 +58,6 @@ extension DestructionViewController: UITableViewDelegate, UITableViewDataSource 
         guard let asteroidCell = cell as? DestructAsteroidCell else { return cell }
         
         let dbAsteroid = fetchedResultsController?.object(at: indexPath)
-        
-        print(dbAsteroid?.name)
         
         return asteroidCell
     }

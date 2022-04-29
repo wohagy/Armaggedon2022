@@ -10,24 +10,29 @@ import UIKit
 protocol AsteroidsPresenterProtocol: AnyObject {
     init(view: AsteroidsViewProtocol,
          networkService: RequestSenderProtocol,
+         coreDataService: CoreDataServiceProtocol,
          router: RouterProtocol)
     
     func viewDidLoad()
-    func loadMoreAsteroids() 
+    func loadMoreAsteroids()
+    func saveDestructAsteroid(_ asteroid: Asteroid)
 }
 
 final class AsteroidsPresenter: AsteroidsPresenterProtocol {
     
     init(view: AsteroidsViewProtocol,
          networkService: RequestSenderProtocol,
+         coreDataService: CoreDataServiceProtocol,
          router: RouterProtocol) {
         self.view = view
         self.networkService = networkService
+        self.coreDataService = coreDataService
         self.router = router
     }
     
     private weak var view: AsteroidsViewProtocol?
     private var networkService: RequestSenderProtocol?
+    private var coreDataService: CoreDataServiceProtocol?
     private var router: RouterProtocol
     
     private var isLoadInProgress = false
@@ -74,4 +79,21 @@ final class AsteroidsPresenter: AsteroidsPresenterProtocol {
             }
         }
     }
+    
+    func saveDestructAsteroid(_ asteroid: Asteroid) {
+        let isContains = coreDataService?.fetchAsteroid(asteroidName: asteroid.name)
+        
+        guard isContains == nil else { return }
+        
+        coreDataService?.performSaveOnViewContext { context in
+            let dbAsteroid = DBAsteroid(context: context)
+            dbAsteroid.name = asteroid.name
+            dbAsteroid.approachDate = asteroid.approachDate
+            dbAsteroid.diameter = asteroid.diameter
+            dbAsteroid.isDanger = asteroid.isDanger
+            dbAsteroid.kmDistance = asteroid.kmDistance
+            dbAsteroid.lunarDistance = asteroid.lunarDistance
+        }
+    }
+
 }

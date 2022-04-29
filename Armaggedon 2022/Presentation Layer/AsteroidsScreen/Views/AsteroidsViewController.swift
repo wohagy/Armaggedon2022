@@ -73,7 +73,7 @@ extension AsteroidsViewController: UITableViewDelegate, UITableViewDataSource {
                                                  for: indexPath)
         guard let asteroidCell = cell as? AsteroidsTableViewCell else { return cell }
         
-        asteroidCell.configure(model: asteroids[indexPath.row])
+        asteroidCell.configure(model: asteroids[indexPath.row], cellDelegate: self)
         
         return asteroidCell
     }
@@ -92,6 +92,15 @@ extension AsteroidsViewController: UIScrollViewDelegate {
         if position > tableView.contentSize.height - 100 - scrollView.frame.size.height {
             presenter?.loadMoreAsteroids()
         }
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension AsteroidsViewController: AsteroidsTableViewCellDelegate {
+    
+    func destructButtonTaped(model: Asteroid) {
+        presenter?.saveDestructAsteroid(model)
     }
 }
 

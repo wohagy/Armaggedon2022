@@ -7,9 +7,16 @@
 
 import UIKit
 
+protocol AsteroidsTableViewCellDelegate: AnyObject {
+    func destructButtonTaped(model: Asteroid)
+}
+
 final class AsteroidsTableViewCell: UITableViewCell {
 
     static let identifier = "AsteroidsTableViewCell"
+    
+    private weak var delegate: AsteroidsTableViewCellDelegate?
+    private var asteroidModel: Asteroid?
     
     private let cellView: UIView = {
         let view = UIView()
@@ -60,19 +67,29 @@ final class AsteroidsTableViewCell: UITableViewCell {
         contentView.addSubview(shadowView)
         addSubviews()
         setupConstraint()
+        destructButton.addTarget(self, action: #selector(destructButtonTaped), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(model: Asteroid) {
+    func configure(model: Asteroid, cellDelegate: AsteroidsTableViewCellDelegate) {
         nameLabel.text = model.name
         diameterLabel.text = "Диаметр: \(model.diameter) км"
         arrivesLabel.text = "Подлетает \(model.approachDate)"
         distanceLabel.text = "на расстояние \(model.kmDistance) км"
         gradeLabel.text = "Оценка: \(model.isDanger ? "опасен" : "не опасен")"
         gradientView.backgroundColor = .green
+        
+        asteroidModel = model
+        delegate = cellDelegate
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        asteroidModel = nil
+        delegate = nil
     }
     
     private func addSubviews() {
@@ -86,6 +103,11 @@ final class AsteroidsTableViewCell: UITableViewCell {
         cellView.addSubview(distanceLabel)
         cellView.addSubview(gradeLabel)
         cellView.addSubview(destructButton)
+    }
+    
+    @objc private func destructButtonTaped() {
+        guard let model = asteroidModel else { return }
+        delegate?.destructButtonTaped(model: model)
     }
     
 }
