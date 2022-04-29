@@ -29,7 +29,7 @@ final class AsteroidsTableViewCell: UITableViewCell {
     
     private let shadowView = ShadowView()
     
-    private let gradientView = UIView()
+    private let gradientView = GradientView()
     
     private let nameLabel: UILabel = {
         let label = UILabel()
@@ -44,6 +44,12 @@ final class AsteroidsTableViewCell: UITableViewCell {
     
     private let dinoImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "dino"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let asteroidImage: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "asteroid"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -65,7 +71,6 @@ final class AsteroidsTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(shadowView)
         addSubviews()
         setupConstraint()
         destructButton.addTarget(self, action: #selector(destructButtonTaped), for: .touchUpInside)
@@ -76,6 +81,7 @@ final class AsteroidsTableViewCell: UITableViewCell {
     }
     
     func configure(model: Asteroid, settings: FilterSettings, cellDelegate: AsteroidsTableViewCellDelegate) {
+     
         nameLabel.text = model.name
         
         diameterLabel.text = "Диаметр: \(model.diameter) км"
@@ -91,7 +97,14 @@ final class AsteroidsTableViewCell: UITableViewCell {
         
         gradeLabel.text = "Оценка: \(model.isDanger ? "опасен" : "не опасен")"
         gradeLabel.textColor = model.isDanger ? .red : .label
-        gradientView.backgroundColor = model.isDanger ? .red : .green
+        
+        if !model.isDanger {
+            gradientView.setupGradient(from: .leading, to: .trailing, startColor: #colorLiteral(red: 0.8083140254, green: 0.9547553658, blue: 0.4897797704, alpha: 1), endColor: #colorLiteral(red: 0.4993742108, green: 0.9082605243, blue: 0.5487979054, alpha: 1))
+        } else {
+            gradientView.setupGradient(from: .leading, to: .trailing, startColor: #colorLiteral(red: 1, green: 0.6734858751, blue: 0.5911862254, alpha: 1), endColor: #colorLiteral(red: 0.9994320273, green: 0.09416929632, blue: 0.2998697162, alpha: 1))
+        }
+        
+        setupAsteroidImage(asteroidDiameter: model.diameter)
         
         asteroidModel = model
         delegate = cellDelegate
@@ -102,6 +115,8 @@ final class AsteroidsTableViewCell: UITableViewCell {
         asteroidModel = nil
         delegate = nil
         destructButton.backgroundColor = .blue
+        asteroidImage.removeFromSuperview()
+        NSLayoutConstraint.deactivate(asteroidImage.constraints)
     }
     
     private func addSubviews() {
@@ -115,6 +130,21 @@ final class AsteroidsTableViewCell: UITableViewCell {
         cellView.addSubview(distanceLabel)
         cellView.addSubview(gradeLabel)
         cellView.addSubview(destructButton)
+    }
+    
+    private func setupAsteroidImage(asteroidDiameter: Double) {
+        
+        let dinoHeight = 0.012
+        let heightMultiplier = asteroidDiameter / dinoHeight
+        
+        gradientView.addSubview(asteroidImage)
+        
+        NSLayoutConstraint.activate([
+            asteroidImage.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -24),
+            asteroidImage.widthAnchor.constraint(equalTo: asteroidImage.heightAnchor),
+            asteroidImage.heightAnchor.constraint(equalTo: dinoImage.heightAnchor, multiplier: CGFloat(heightMultiplier)),
+            asteroidImage.centerXAnchor.constraint(equalTo: gradientView.centerXAnchor, constant: -40)
+        ])
     }
     
     @objc private func destructButtonTaped() {
