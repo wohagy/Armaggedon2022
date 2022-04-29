@@ -30,6 +30,7 @@ final class AsteroidsViewController: UIViewController, AsteroidsViewProtocol {
         presenter?.viewDidLoad()
         setupTableView()
         setupConstraint()
+        customizeNavBar()
         title = "Asteroids"
         view.backgroundColor = .white
     }
@@ -80,6 +81,27 @@ extension AsteroidsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+// MARK: - NavBar Customizing, + NavBar buttons actions
+
+extension AsteroidsViewController {
+    
+    private func customizeNavBar() {
+        
+        let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease"),
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(presentFilterView))
+        
+        filterButton.tintColor = .label
+        
+        self.navigationItem.rightBarButtonItems = [filterButton]
+    }
+    
+    @objc private func presentFilterView() {
+        presenter?.presentFilterScreen()
     }
 }
 

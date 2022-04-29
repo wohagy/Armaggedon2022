@@ -16,6 +16,7 @@ protocol AsteroidsPresenterProtocol: AnyObject {
     func viewDidLoad()
     func loadMoreAsteroids()
     func saveDestructAsteroid(_ asteroid: Asteroid)
+    func presentFilterScreen()
 }
 
 final class AsteroidsPresenter: AsteroidsPresenterProtocol {
@@ -94,6 +95,10 @@ final class AsteroidsPresenter: AsteroidsPresenterProtocol {
             dbAsteroid.kmDistance = asteroid.kmDistance
             dbAsteroid.lunarDistance = asteroid.lunarDistance
         }
+    }
+    
+    func presentFilterScreen() {
+        router.presentFilterViewController()
     }
 
 }

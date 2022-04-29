@@ -27,6 +27,8 @@
 		FA0D8125281C495B0008316B /* DestructAsteroidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D8124281C495B0008316B /* DestructAsteroidCell.swift */; };
 		FA0D8128281C49D20008316B /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D8127281C49D20008316B /* Array.swift */; };
 		FA0D812C281C66BB0008316B /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D812B281C66BB0008316B /* UIButton.swift */; };
+		FA0D8130281C6C9E0008316B /* FilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D812F281C6C9E0008316B /* FilterPresenter.swift */; };
+		FA0D8135281C6D100008316B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D8134281C6D100008316B /* FilterViewController.swift */; };
 		FA9A3CB12819C18D0038FC89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9A3CB02819C18D0038FC89 /* AppDelegate.swift */; };
 		FA9A3CBA2819C1990038FC89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA9A3CB92819C1990038FC89 /* Assets.xcassets */; };
 		FA9A3CBD2819C1990038FC89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA9A3CBB2819C1990038FC89 /* LaunchScreen.storyboard */; };
@@ -64,6 +66,8 @@
 		FA0D8124281C495B0008316B /* DestructAsteroidCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructAsteroidCell.swift; sourceTree = "<group>"; };
 		FA0D8127281C49D20008316B /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		FA0D812B281C66BB0008316B /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		FA0D812F281C6C9E0008316B /* FilterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPresenter.swift; sourceTree = "<group>"; };
+		FA0D8134281C6D100008316B /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		FA9A3CAD2819C18D0038FC89 /* Armaggedon 2022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Armaggedon 2022.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA9A3CB02819C18D0038FC89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA9A3CB92819C1990038FC89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -186,6 +190,31 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		FA0D812E281C6C7E0008316B /* FilterScreen */ = {
+			isa = PBXGroup;
+			children = (
+				FA0D812F281C6C9E0008316B /* FilterPresenter.swift */,
+				FA0D8132281C6CF80008316B /* Views */,
+			);
+			path = FilterScreen;
+			sourceTree = "<group>";
+		};
+		FA0D8132281C6CF80008316B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA0D8134281C6D100008316B /* FilterViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA0D8137281C72550008316B /* ShadowView */ = {
+			isa = PBXGroup;
+			children = (
+				FA9A3CFD281A15800038FC89 /* ShadowView.swift */,
+			);
+			path = ShadowView;
+			sourceTree = "<group>";
+		};
 		FA9A3CA42819C18C0038FC89 = {
 			isa = PBXGroup;
 			children = (
@@ -223,7 +252,9 @@
 				FA9A3CD72819CA350038FC89 /* AssemblyBuilder.swift */,
 				FA0D8120281C480F0008316B /* BaseFetchedResultsControllerDelegate.swift */,
 				FA9A3CDE2819CAC50038FC89 /* AsteroidsScreen */,
+				FA0D812E281C6C7E0008316B /* FilterScreen */,
 				FA9A3CDF2819CB020038FC89 /* DestructionScreen */,
+				FA0D8137281C72550008316B /* ShadowView */,
 				FA9A3CCF2819C7E60038FC89 /* AppDelegate */,
 				FA9A3CD12819C8170038FC89 /* LaunchScreen */,
 				FA9A3CD02819C7F20038FC89 /* Assets */,
@@ -305,7 +336,6 @@
 			children = (
 				FA9A3CE02819CB540038FC89 /* AsteroidsViewController.swift */,
 				FA9A3CF7281A02FD0038FC89 /* AsteroidsTableViewCell.swift */,
-				FA9A3CFD281A15800038FC89 /* ShadowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -447,9 +477,11 @@
 				FA0D80EE281BF42D0008316B /* NetworkService.swift in Sources */,
 				FA0D811E281C428E0008316B /* CoreDataService.swift in Sources */,
 				FA9A3CD82819CA350038FC89 /* AssemblyBuilder.swift in Sources */,
+				FA0D8135281C6D100008316B /* FilterViewController.swift in Sources */,
 				FA0D8115281C41980008316B /* CoreDataModel.xcdatamodeld in Sources */,
 				FA0D80FF281BF51C0008316B /* AsteroidsApiModel.swift in Sources */,
 				FA9A3CEA2819CBE30038FC89 /* DestructionViewController.swift in Sources */,
+				FA0D8130281C6C9E0008316B /* FilterPresenter.swift in Sources */,
 				FA9A3CB12819C18D0038FC89 /* AppDelegate.swift in Sources */,
 				FA0D80E7281BF3E60008316B /* ParserProtocol.swift in Sources */,
 				FA0D80EA281BF3E60008316B /* RequestProtocol.swift in Sources */,

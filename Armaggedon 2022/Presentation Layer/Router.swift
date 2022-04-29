@@ -15,6 +15,7 @@ protocol ItemRouter {
 protocol RouterProtocol: ItemRouter {
     func asteroidsInitialViewController()
     func destructionInitialViewController()
+    func presentFilterViewController()
 }
 
 final class Router: RouterProtocol {
@@ -41,6 +42,13 @@ final class Router: RouterProtocol {
             guard let destructionViewController = assemblyBuilder?.createDestructionModule(router: self) else { return }
             navigationController.title = "Destruction"
             navigationController.viewControllers = [destructionViewController]
+        }
+    }
+    
+    func presentFilterViewController() {
+        if let navigationController = navigationController {
+            guard let filterViewController = assemblyBuilder?.createFilterModule(router: self) else { return }
+            navigationController.pushViewController(filterViewController, animated: true)
         }
     }
 
