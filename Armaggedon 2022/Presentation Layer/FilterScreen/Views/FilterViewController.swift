@@ -11,7 +11,12 @@ protocol FilterViewProtocol: AnyObject {
     
 }
 
-class FilterViewController: UIViewController, FilterViewProtocol {
+final class FilterViewController: UIViewController, FilterViewProtocol {
+    
+    enum CellType: Int, CaseIterable {
+        case unitFilterCell
+        case dangerFilterCell
+    }
 
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
@@ -33,21 +38,35 @@ class FilterViewController: UIViewController, FilterViewProtocol {
 extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
     
     private func setupTableView() {
-        tableView.register(DestructAsteroidCell.self, forCellReuseIdentifier: DestructAsteroidCell.identifier)
+        tableView.register(UnitFilterTableViewCell.self, forCellReuseIdentifier: UnitFilterTableViewCell.identifier)
+        tableView.register(DangerFilterTableViewCell.self, forCellReuseIdentifier: DangerFilterTableViewCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return CellType.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: DestructAsteroidCell.identifier,
-                                                 for: indexPath)
+        let defaultCell = tableView.dequeueReusableCell(withIdentifier: UnitFilterTableViewCell.identifier, for: indexPath)
+        guard let cellType = CellType(rawValue: indexPath.row) else { return defaultCell }
         
-        return cell
+        switch cellType {
+        
+        case .unitFilterCell:
+            let cell = tableView.dequeueReusableCell(withIdentifier: UnitFilterTableViewCell.identifier, for: indexPath)
+            guard let unitFilterCell = cell as? UnitFilterTableViewCell else { return cell }
+            unitFilterCell.configure()
+            return unitFilterCell
+            
+        case .dangerFilterCell:
+            let cell = tableView.dequeueReusableCell(withIdentifier: DangerFilterTableViewCell.identifier, for: indexPath)
+            guard let dangerFilterCell = cell as? DangerFilterTableViewCell else { return cell }
+            dangerFilterCell.configure()
+            return dangerFilterCell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

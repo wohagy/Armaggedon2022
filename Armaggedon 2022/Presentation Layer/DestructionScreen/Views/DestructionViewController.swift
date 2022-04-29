@@ -12,7 +12,7 @@ protocol DestructionViewProtocol: AnyObject {
     var fetchedResultsController: NSFetchedResultsController<DBAsteroid>? { get set }
 }
 
-class DestructionViewController: UIViewController, DestructionViewProtocol {
+final class DestructionViewController: UIViewController, DestructionViewProtocol {
     
     private let brussButton: UIButton = {
         let button = UIButton()
