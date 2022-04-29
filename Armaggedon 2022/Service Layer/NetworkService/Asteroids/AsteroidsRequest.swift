@@ -8,6 +8,8 @@
 import Foundation
 
 struct AsteroidsRequest: RequestProtocol {
+    let startDay: Date
+    let endDay: Date
     var urlRequest: URLRequest? {
         let apiKey = "Uf8WSpC4T4RtLHhYLj3f1aNfjCDi3bZv3efGuaQd"
         
@@ -16,15 +18,18 @@ struct AsteroidsRequest: RequestProtocol {
         components.scheme = "https"
         components.host = "api.nasa.gov"
         components.path = "/neo/rest/v1/feed"
-
-        let queryItemStartDay = URLQueryItem(name: "start_date", value: "2015-09-07")
-        let queryItemEndDay = URLQueryItem(name: "end_date", value: "2015-09-08")
+        
+        let startDayString = startDay.stringFromDate(dateFormat: "yyyy-MM-dd")
+        let endDayString = endDay.stringFromDate(dateFormat: "yyyy-MM-dd")
+        let queryItemStartDay = URLQueryItem(name: "start_date", value: startDayString)
+        let queryItemEndDay = URLQueryItem(name: "end_date", value: endDayString)
+        
         let queryItemApiKey = URLQueryItem(name: "api_key", value: apiKey)
 
         components.queryItems = [queryItemStartDay, queryItemEndDay, queryItemApiKey]
         
         guard let url = components.url else { return nil }
-        print(url)
+        
         return URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60)
     }
 }

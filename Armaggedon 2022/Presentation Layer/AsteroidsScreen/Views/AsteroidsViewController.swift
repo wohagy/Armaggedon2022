@@ -12,16 +12,12 @@ protocol AsteroidsViewProtocol: AnyObject {
     var asteroids: [Asteroid] { get set }
     
     func showTableView()
+    func tableViewAddIndicator(for isNeedIndicator: Bool)
 }
 
 final class AsteroidsViewController: UIViewController, AsteroidsViewProtocol {
     
-    private let loadIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        indicator.startAnimating()
-        return indicator
-    }()
+    private lazy var loadIndicator = getActivityIndicator()
     
     let tableView = UITableView(frame: .zero)
     
@@ -41,6 +37,17 @@ final class AsteroidsViewController: UIViewController, AsteroidsViewProtocol {
     func showTableView() {
         loadIndicator.isHidden = true
         tableView.isHidden = false
+    }
+    
+    func tableViewAddIndicator(for isNeedIndicator: Bool) {
+        tableView.tableFooterView = isNeedIndicator ? getActivityIndicator() : nil
+    }
+    
+    private func getActivityIndicator() -> UIActivityIndicatorView {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.startAnimating()
+        return indicator
     }
 }
 
@@ -69,6 +76,22 @@ extension AsteroidsViewController: UITableViewDelegate, UITableViewDataSource {
         asteroidCell.configure(model: asteroids[indexPath.row])
         
         return asteroidCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension AsteroidsViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        if position > tableView.contentSize.height - 100 - scrollView.frame.size.height {
+            presenter?.loadMoreAsteroids()
+        }
     }
 }
 

@@ -51,7 +51,6 @@ final class AsteroidsParser: ParserProtocol {
             }
             return asteroids
         } catch {
-            print("cant parse")
             return nil
         }
     }

@@ -9,8 +9,8 @@ import Foundation
 
 struct RequestsFactory {
     struct AsteroidsConfig {
-        static func asteroidsConfig() -> RequestConfig<AsteroidsParser> {
-            return RequestConfig<AsteroidsParser>(request: AsteroidsRequest(), parser: AsteroidsParser())
+        static func asteroidsConfig(startDay: Date, endDay: Date) -> RequestConfig<AsteroidsParser> {
+            return RequestConfig<AsteroidsParser>(request: AsteroidsRequest(startDay: startDay, endDay: endDay), parser: AsteroidsParser())
         }
     }
 }
