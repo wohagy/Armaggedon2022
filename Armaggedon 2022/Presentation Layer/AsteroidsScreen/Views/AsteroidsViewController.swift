@@ -10,9 +10,18 @@ import UIKit
 protocol AsteroidsViewProtocol: AnyObject {
     var tableView: UITableView { get }
     var asteroids: [Asteroid] { get set }
+    
+    func showTableView()
 }
 
 final class AsteroidsViewController: UIViewController, AsteroidsViewProtocol {
+    
+    private let loadIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.startAnimating()
+        return indicator
+    }()
     
     let tableView = UITableView(frame: .zero)
     
@@ -28,6 +37,11 @@ final class AsteroidsViewController: UIViewController, AsteroidsViewProtocol {
         title = "Asteroids"
         view.backgroundColor = .white
     }
+    
+    func showTableView() {
+        loadIndicator.isHidden = true
+        tableView.isHidden = false
+    }
 }
 
 // MARK: - setupTableView(), UITableViewDataSource & UITableViewDelegate
@@ -36,6 +50,8 @@ extension AsteroidsViewController: UITableViewDelegate, UITableViewDataSource {
     
     private func setupTableView() {
         tableView.register(AsteroidsTableViewCell.self, forCellReuseIdentifier: AsteroidsTableViewCell.identifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.isHidden = true
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
@@ -61,10 +77,14 @@ extension AsteroidsViewController: UITableViewDelegate, UITableViewDataSource {
 extension AsteroidsViewController {
     
     private func setupConstraint() {
+        view.addSubview(loadIndicator)
         view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            
+            loadIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),

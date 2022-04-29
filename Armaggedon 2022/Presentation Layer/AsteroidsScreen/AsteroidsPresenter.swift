@@ -41,6 +41,7 @@ final class AsteroidsPresenter: AsteroidsPresenterProtocol {
                 DispatchQueue.main.async {
                     self.view?.asteroids = asteroids
                     self.view?.tableView.reloadData()
+                    self.view?.showTableView()
                 }
             case .failure(let error):
                 print(error)
