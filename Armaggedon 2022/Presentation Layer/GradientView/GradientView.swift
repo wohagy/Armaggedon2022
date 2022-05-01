@@ -60,6 +60,7 @@ class GradientView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.layer.addSublayer(gradientLayer)
     }
     
     override func layoutSubviews() {
@@ -68,7 +69,6 @@ class GradientView: UIView {
     }
     
     func setupGradient(from: Point, to: Point, startColor: UIColor?, endColor: UIColor?) {
-        self.layer.addSublayer(gradientLayer)
         setupGradientColors(startColor: startColor, endColor: endColor)
         gradientLayer.startPoint = from.point
         gradientLayer.endPoint = to.point

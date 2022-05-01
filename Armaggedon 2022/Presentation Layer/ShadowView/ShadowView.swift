@@ -10,6 +10,19 @@ import UIKit
 final class ShadowView: UIView {
 
     private var shadowLayer: CAShapeLayer!
+    
+    private let shadowOpacity: Float
+    private let shadowRadius: CGFloat
+    
+    init(shadowOpacity: Float, shadowRadius: CGFloat, frame: CGRect) {
+        self.shadowOpacity = shadowOpacity
+        self.shadowRadius = shadowRadius
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -22,8 +35,8 @@ final class ShadowView: UIView {
             shadowLayer.shadowColor = UIColor.darkGray.cgColor
             shadowLayer.shadowPath = shadowLayer.path
             shadowLayer.shadowOffset = .zero
-            shadowLayer.shadowOpacity = 0.7
-            shadowLayer.shadowRadius = 7
+            shadowLayer.shadowOpacity = shadowOpacity
+            shadowLayer.shadowRadius = shadowRadius
 
             layer.insertSublayer(shadowLayer, at: 0)
         }

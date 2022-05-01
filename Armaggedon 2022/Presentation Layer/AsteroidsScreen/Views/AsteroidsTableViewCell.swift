@@ -27,7 +27,7 @@ final class AsteroidsTableViewCell: UITableViewCell {
         return view
     }()
     
-    private let shadowView = ShadowView()
+    private let shadowView = ShadowView(shadowOpacity: 0.7, shadowRadius: 7, frame: .zero)
     
     private let gradientView = GradientView()
     

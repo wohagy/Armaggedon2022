@@ -11,7 +11,7 @@ final class DestructAsteroidCell: UITableViewCell {
 
     static let identifier = "DestructAsteroidCell"
     
-    private let shadowView = ShadowView()
+    private let shadowView = ShadowView(shadowOpacity: 0.7, shadowRadius: 7, frame: .zero)
     
     private let cellView = UIView()
     

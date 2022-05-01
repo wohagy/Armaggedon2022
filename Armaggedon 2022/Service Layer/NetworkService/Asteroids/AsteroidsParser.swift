@@ -27,7 +27,7 @@ final class AsteroidsParser: ParserProtocol {
                     var lunarDistance: Double
                     var isDanger: Bool
                     
-                    name = asteroid.name
+                    name = textFromParentheses(asteroid.name) ?? "Неизвестно"
                     
                     isDanger = asteroid.isPotentiallyHazardousAsteroid
                     
@@ -52,6 +52,30 @@ final class AsteroidsParser: ParserProtocol {
             }
             return asteroids
         } catch {
+            return nil
+        }
+    }
+
+    private func textFromParentheses(_ text: String) -> String? {
+        
+        do {
+            let pattern = "\\((.*?)\\)"
+            let regex = try NSRegularExpression(pattern: pattern, options: [])
+            let nsString = text as NSString
+            let range = nsString.range(of: text)
+            let results = regex.matches(in: text, options: [], range: range)
+            
+            guard let result = results.first else { return nil }
+            
+            var resultString = nsString.substring(with: result.range)
+            resultString.removeFirst()
+            resultString.removeLast()
+            
+            return resultString
+            
+        } catch let error as NSError {
+            
+            print("invalid regex: \(error.localizedDescription)")
             return nil
         }
     }
