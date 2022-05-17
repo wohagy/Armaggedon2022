@@ -9,9 +9,6 @@ import Foundation
 import CoreData
 
 protocol DestructionPresenterProtocol: AnyObject {
-    init(view: DestructionViewProtocol,
-         coreDataService: CoreDataServiceProtocol,
-         router: RouterProtocol)
     
     func viewDidLoad()
     func deleteAsteroidsFromDB()
@@ -28,11 +25,11 @@ final class DestructionPresenter: DestructionPresenterProtocol {
     }
     
     private weak var view: DestructionViewProtocol?
-    private var coreDataService: CoreDataServiceProtocol?
-    private var router: RouterProtocol
+    private let coreDataService: CoreDataServiceProtocol
+    private let router: RouterProtocol
     
     private func getFetchedResultsController() -> NSFetchedResultsController<DBAsteroid>? {
-        guard let context = coreDataService?.viewContext else { return nil }
+        let context = coreDataService.viewContext
         let fetchRequest: NSFetchRequest<DBAsteroid> = DBAsteroid.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(DBAsteroid.diameter), ascending: false)]
         fetchRequest.fetchBatchSize = 10
@@ -56,8 +53,8 @@ final class DestructionPresenter: DestructionPresenterProtocol {
     }
     
     func deleteAsteroidsFromDB() {
-        guard let dbAsteroids = coreDataService?.fetchAsteroids() else { return }
-        coreDataService?.performSaveOnViewContext { context in
+        guard let dbAsteroids = coreDataService.fetchAsteroids() else { return }
+        coreDataService.performSaveOnViewContext { context in
             for dbAsteroid in dbAsteroids {
                 context.delete(dbAsteroid)
             }

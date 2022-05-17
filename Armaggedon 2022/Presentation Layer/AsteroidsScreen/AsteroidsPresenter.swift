@@ -8,10 +8,6 @@
 import UIKit
 
 protocol AsteroidsPresenterProtocol: AnyObject {
-    init(view: AsteroidsViewProtocol,
-         networkService: RequestSenderProtocol,
-         coreDataService: CoreDataServiceProtocol,
-         router: RouterProtocol)
     
     func viewDidLoad()
     func loadMoreAsteroids()
@@ -32,9 +28,9 @@ final class AsteroidsPresenter: AsteroidsPresenterProtocol {
     }
     
     private weak var view: AsteroidsViewProtocol?
-    private var networkService: RequestSenderProtocol?
-    private var coreDataService: CoreDataServiceProtocol?
-    private var router: RouterProtocol
+    private let networkService: RequestSenderProtocol
+    private let coreDataService: CoreDataServiceProtocol
+    private let router: RouterProtocol
     
     private var isLoadInProgress = false
     private var requestStartDay = Date()
@@ -67,7 +63,7 @@ final class AsteroidsPresenter: AsteroidsPresenterProtocol {
         
         requestStartDay = endDay
         
-        networkService?.send(requestConfig: requestConfig) { [weak self] result in
+        networkService.send(requestConfig: requestConfig) { [weak self] result in
             switch result {
             case .success(let asteroids):
                 DispatchQueue.main.async {
@@ -96,11 +92,11 @@ final class AsteroidsPresenter: AsteroidsPresenterProtocol {
     }
     
     func saveDestructAsteroid(_ asteroid: Asteroid) {
-        let isContains = coreDataService?.fetchAsteroid(asteroidName: asteroid.name)
+        let isContains = coreDataService.fetchAsteroid(asteroidName: asteroid.name)
         
         guard isContains == nil else { return }
         
-        coreDataService?.performSaveOnViewContext { context in
+        coreDataService.performSaveOnViewContext { context in
             let dbAsteroid = DBAsteroid(context: context)
             dbAsteroid.name = asteroid.name
             dbAsteroid.approachDate = asteroid.approachDate

@@ -8,10 +8,6 @@
 import Foundation
 
 protocol FilterPresenterProtocol: AnyObject {
-    init(view: FilterViewProtocol,
-         filterSettings: FilterSettings,
-         filterSettingsDelegate: FilterDelegate,
-         router: RouterProtocol)
     
     func viewDidLoad()
     func changeSettings(settings: FilterSettings)
@@ -30,9 +26,9 @@ final class FilterPresenter: FilterPresenterProtocol {
     }
     
     private weak var view: FilterViewProtocol?
-    private var filterSettings: FilterSettings?
+    private let filterSettings: FilterSettings
     private var filterSettingsDelegate: FilterDelegate?
-    private var router: RouterProtocol
+    private let router: RouterProtocol
     
     func viewDidLoad() {
         self.view?.filterSettings = filterSettings
